@@ -14,9 +14,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.input.TextFieldState
+import androidx.compose.foundation.text.input.TextObfuscationMode
 import androidx.compose.foundation.text.input.rememberTextFieldState
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedSecureTextField
 import androidx.compose.material3.OutlinedTextField
@@ -24,6 +30,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
@@ -56,8 +64,8 @@ fun LoginScreen(modifier: Modifier = Modifier) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "Đăng ký để mua hàng",
-                fontSize = 48.sp,
+                text = "Chào mừng bạn quay trở lại",
+                fontSize = 38.sp,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center,
                 lineHeight = 58.sp
@@ -95,13 +103,23 @@ fun LoginForm(
         Spacer(Modifier.height(12.dp))
 
         FormLabel(text = "Mật khẩu")
+        val hidden = remember { mutableStateOf(true) }
         OutlinedSecureTextField(
             modifier = Modifier
                 .fillMaxWidth()
                 .scale(scaleY = 0.9F, scaleX = 1F),
             state = passwordState,
             placeholder = { Text(text = "12345678") },
-            shape = RoundedCornerShape(6.dp)
+            shape = RoundedCornerShape(6.dp),
+            trailingIcon = {
+                IconButton(onClick = { hidden.value = !hidden.value }) {
+                    Icon(
+                        imageVector = if (hidden.value) Icons.Default.VisibilityOff else Icons.Default.Visibility,
+                        contentDescription = ""
+                    )
+                }
+            },
+            textObfuscationMode = if (hidden.value) TextObfuscationMode.Hidden else TextObfuscationMode.Visible
         )
         Spacer(Modifier.height(16.dp))
 
@@ -158,7 +176,7 @@ fun SocialMethods(modifier: Modifier = Modifier) {
                 )
                 Text(
                     modifier = Modifier.fillMaxWidth(),
-                    text = "Đăng ký bằng Google",
+                    text = "Tiếp tục bằng Google",
                     fontWeight = FontWeight.Bold,
                     fontSize = 16.sp,
                     textAlign = TextAlign.Center
@@ -177,10 +195,10 @@ fun BottomContent(modifier: Modifier = Modifier) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Text(text = "Bạn đã có tài khoản?", fontSize = 14.sp)
+        Text(text = "Bạn chưa có tài khoản?", fontSize = 14.sp)
         TextButton(onClick = {}) {
             Text(
-                text = "Đăng nhập",
+                text = "Đăng ký",
                 fontWeight = FontWeight.Bold,
                 fontSize = 16.sp
             )

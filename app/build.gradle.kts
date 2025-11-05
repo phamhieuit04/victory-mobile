@@ -78,4 +78,5 @@ dependencies {
     implementation(libs.hilt.navigation.compose)
     implementation(libs.compose.material.icons.core)
     implementation("androidx.compose.ui:ui-text-google-fonts:1.9.3")
+    implementation("androidx.compose.material:material-icons-extended")
 }
