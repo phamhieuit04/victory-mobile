@@ -11,6 +11,6 @@ import com.example.victorymobile.ui.graphs.authGraph
 fun AppNavigation(modifier: Modifier = Modifier) {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = AuthGraph) {
-        authGraph()
+        authGraph(navController = navController)
     }
 }
