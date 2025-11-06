@@ -62,7 +62,10 @@ fun LoginForm(
             label = "Địa chỉ email",
             placeholder = "example@gmail.com"
         )
-        FormPasswordField(state = passwordState)
+        FormPasswordField(
+            state = passwordState,
+            label = "Mật khẩu"
+        )
         FormButton(onClick = {}, text = "Tiếp theo")
         FormSocialMethods(text = "Tiếp tục")
     }
