@@ -1,29 +1,32 @@
 package com.example.victorymobile.ui.screens.auth
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.input.TextFieldState
-import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.victorymobile.ui.components.form.FormButton
+import com.example.victorymobile.ui.components.form.FormErrorText
 import com.example.victorymobile.ui.components.form.FormFooter
 import com.example.victorymobile.ui.components.form.FormPasswordField
 import com.example.victorymobile.ui.components.form.FormSocialMethods
 import com.example.victorymobile.ui.components.form.FormTextField
 import com.example.victorymobile.ui.components.form.FormTitle
+import com.example.victorymobile.viewmodels.AuthViewModel
 import kotlinx.serialization.Serializable
 
 
@@ -34,11 +37,18 @@ object StepOne
 object StepTwo
 
 @Composable
-fun SignupScreen(modifier: Modifier = Modifier, onNavigateToLogin: () -> Unit) {
-    val usernameState = rememberTextFieldState()
-    val emailState = rememberTextFieldState()
-    val passwordState = rememberTextFieldState()
-    val passwordConfirmationState = rememberTextFieldState()
+fun SignupScreen(
+    modifier: Modifier = Modifier,
+    viewModel: AuthViewModel = hiltViewModel<AuthViewModel>(),
+    onNavigateToLogin: () -> Unit
+) {
+    val signupState = viewModel.signupState.collectAsStateWithLifecycle()
+
+    LaunchedEffect(signupState.value.isSignupDone) {
+        if (signupState.value.isSignupDone) {
+            onNavigateToLogin()
+        }
+    }
 
     Scaffold(
         modifier = modifier.background(color = Color.White),
@@ -59,10 +69,13 @@ fun SignupScreen(modifier: Modifier = Modifier, onNavigateToLogin: () -> Unit) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             SignupForm(
-                usernameState = usernameState,
-                emailState = emailState,
-                passwordState = passwordState,
-                passwordConfirmationState = passwordConfirmationState
+                usernameState = signupState.value.username,
+                emailState = signupState.value.email,
+                passwordState = signupState.value.password,
+                passwordConfirmationState = signupState.value.passwordConfirmation,
+                onSubmit = { viewModel.processSignup() },
+                isLoading = signupState.value.isLoading,
+                errorMessage = signupState.value.errorMessage
             )
         }
     }
@@ -75,6 +88,9 @@ fun SignupForm(
     emailState: TextFieldState,
     passwordState: TextFieldState,
     passwordConfirmationState: TextFieldState,
+    onSubmit: () -> Unit,
+    isLoading: Boolean = false,
+    errorMessage: String? = null
 ) {
     val navController = rememberNavController()
 
@@ -91,9 +107,11 @@ fun SignupForm(
             }
             composable<StepTwo> {
                 SignupStepTwo(
-                    onClick = { Log.i("MyApp", "Navigate to home") },
+                    onClick = onSubmit,
                     passwordState = passwordState,
-                    passwordConfirmationState = passwordConfirmationState
+                    passwordConfirmationState = passwordConfirmationState,
+                    isLoading = isLoading,
+                    errorMessage = errorMessage
                 )
             }
         }
@@ -106,7 +124,7 @@ fun SignupStepOne(
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
     usernameState: TextFieldState,
-    emailState: TextFieldState,
+    emailState: TextFieldState
 ) {
     Column() {
         FormTextField(
@@ -131,7 +149,9 @@ fun SignupStepTwo(
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
     passwordState: TextFieldState,
-    passwordConfirmationState: TextFieldState
+    passwordConfirmationState: TextFieldState,
+    isLoading: Boolean = false,
+    errorMessage: String? = null
 ) {
     Column() {
         FormPasswordField(
@@ -142,9 +162,11 @@ fun SignupStepTwo(
             state = passwordConfirmationState,
             label = "Nhập lại mật khẩu"
         )
+        if (errorMessage != null) FormErrorText(message = errorMessage)
         FormButton(
             onClick = onClick,
-            text = "Đăng ký"
+            text = "Đăng ký",
+            isLoading = isLoading
         )
     }
 }

@@ -32,7 +32,20 @@ class AuthRepository @Inject constructor(
         email: String,
         password: String,
         passwordConfirmation: String
-    ): Any? {
-        return null
+    ): HttpResponse? {
+        try {
+            return httpClient.submitForm(
+                url = "signup",
+                formParameters = parameters {
+                    append(name = "name", value = name)
+                    append(name = "email", value = email)
+                    append(name = "password", value = password)
+                    append(name = "password_confirmation", value = passwordConfirmation)
+                })
+        } catch (e: Exception) {
+            Log.i("MyApp", e.toString())
+
+            return null
+        }
     }
 }

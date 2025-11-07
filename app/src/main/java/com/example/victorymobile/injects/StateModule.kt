@@ -1,6 +1,7 @@
 package com.example.victorymobile.injects
 
 import com.example.victorymobile.states.LoginState
+import com.example.victorymobile.states.SignupState
 import com.example.victorymobile.states.UserState
 import dagger.Module
 import dagger.Provides
@@ -16,6 +17,12 @@ object StateModule {
     @Singleton
     fun provideLoginState(): MutableStateFlow<LoginState> {
         return MutableStateFlow(LoginState())
+    }
+
+    @Provides
+    @Singleton
+    fun provideSignupState(): MutableStateFlow<SignupState> {
+        return MutableStateFlow(SignupState())
     }
 
     @Provides

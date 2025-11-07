@@ -9,5 +9,5 @@ interface AuthRepositoryInterface {
         email: String,
         password: String,
         passwordConfirmation: String
-    ): Any?
+    ): HttpResponse?
 }
