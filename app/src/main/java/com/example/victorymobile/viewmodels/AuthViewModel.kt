@@ -42,7 +42,11 @@ class AuthViewModel @Inject constructor(
             }
             if (response.status.value != 200) {
                 val error =
-                    JsonHelper.parseString(from = response.body(), to = "message", key = "message")
+                    JsonHelper.parseString(
+                        from = response.body(),
+                        to = "errors",
+                        key = "errors"
+                    )
                 _loginState.update { state ->
                     state.copy(
                         isLoading = false,

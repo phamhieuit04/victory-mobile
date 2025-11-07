@@ -15,11 +15,13 @@ import kotlin.reflect.KClass
 object JsonHelper {
     private val json = Json {
         ignoreUnknownKeys = true
+        prettyPrint = true
     }
 
     private fun parseResponse(from: String, to: String): Map<String, JsonElement>? {
         val result = json.parseToJsonElement(from).jsonObject
-        if (to != "data" && to != "message") return null
+
+        if (to != "data" && to != "message" && to != "errors") return null
         val target = result[to] ?: return null
 
         return when (target) {
@@ -31,7 +33,7 @@ object JsonHelper {
 
     @OptIn(InternalSerializationApi::class)
     fun <T : Any> parseJson(from: String, to: KClass<T>, key: String): T? {
-        val data = parseResponse(from = from, to = "body")
+        val data = parseResponse(from = from, to = "data")
         val element = data?.getValue(key = key) ?: return null
         val serializer: KSerializer<T> = to.serializer()
 
