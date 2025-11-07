@@ -7,7 +7,6 @@ data class SignupState(
     var email: TextFieldState = TextFieldState(initialText = "admin@gmail.com"),
     var password: TextFieldState = TextFieldState(initialText = "12345678"),
     var passwordConfirmation: TextFieldState = TextFieldState(initialText = "12345678"),
-    var isSignupDone: Boolean = false,
     var isLoading: Boolean = false,
     var errorMessage: String? = null
 )

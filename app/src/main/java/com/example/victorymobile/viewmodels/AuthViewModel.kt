@@ -1,6 +1,5 @@
 package com.example.victorymobile.viewmodels
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.victorymobile.contracts.repositories.AuthRepositoryInterface
@@ -9,11 +8,13 @@ import com.example.victorymobile.models.User
 import com.example.victorymobile.states.LoginState
 import com.example.victorymobile.states.SignupState
 import com.example.victorymobile.states.UserState
+import com.example.victorymobile.ui.NavigationEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.ktor.client.call.body
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -29,12 +30,14 @@ class AuthViewModel @Inject constructor(
     val signupState = _signupState.asStateFlow()
     val userState = _userState.asStateFlow()
 
+    private val _navigationChannel = Channel<NavigationEvent>()
+    val navigationChannel = _navigationChannel.receiveAsFlow()
+
     fun processLogin() {
         viewModelScope.launch {
             _loginState.update { state ->
                 state.copy(
-                    isLoading = true,
-                    isLoggedIn = false
+                    isLoading = true
                 )
             }
 
@@ -82,10 +85,10 @@ class AuthViewModel @Inject constructor(
             _loginState.update { state ->
                 state.copy(
                     isLoading = false,
-                    isLoggedIn = true,
                     errorMessage = null
                 )
             }
+            _navigationChannel.send(NavigationEvent.NavigateToHome)
         }
     }
 
@@ -117,7 +120,6 @@ class AuthViewModel @Inject constructor(
                     to = "message",
                     key = "message"
                 )
-                Log.i("MyApp", error.toString())
                 _signupState.update { state ->
                     state.copy(
                         isLoading = false,
@@ -130,17 +132,10 @@ class AuthViewModel @Inject constructor(
             _signupState.update { state ->
                 state.copy(
                     isLoading = false,
-                    isSignupDone = true,
                     errorMessage = null
                 )
             }
-
-            delay(100)
-            _signupState.update { state ->
-                state.copy(
-                    isSignupDone = false
-                )
-            }
+            _navigationChannel.send(NavigationEvent.NavigateToLogin)
         }
     }
 }

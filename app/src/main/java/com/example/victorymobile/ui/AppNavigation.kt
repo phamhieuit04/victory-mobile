@@ -14,3 +14,8 @@ fun AppNavigation(modifier: Modifier = Modifier) {
         authGraph(navController = navController)
     }
 }
+
+sealed interface NavigationEvent {
+    object NavigateToLogin : NavigationEvent
+    object NavigateToHome : NavigationEvent
+}

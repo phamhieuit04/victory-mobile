@@ -6,6 +6,5 @@ data class LoginState(
     var email: TextFieldState = TextFieldState(initialText = "tomnguyenhieu2004@gmail.com"),
     var password: TextFieldState = TextFieldState(initialText = "12345678"),
     var isLoading: Boolean = false,
-    var isLoggedIn: Boolean = false,
     var errorMessage: String? = null
 )

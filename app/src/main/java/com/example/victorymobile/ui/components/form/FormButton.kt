@@ -29,8 +29,8 @@ fun FormButton(
         modifier = modifier.fillMaxWidth(),
         contentPadding = PaddingValues(16.dp),
         colors = ButtonDefaults.buttonColors(
-            containerColor = Color(0xff3449ca),
-            disabledContainerColor = Color(0xff3449ca).copy(alpha = 0.75f)
+            containerColor = Color(0xff435776),
+            disabledContainerColor = Color(0xff435776).copy(alpha = 0.75f)
         ),
         enabled = !isLoading
     ) {

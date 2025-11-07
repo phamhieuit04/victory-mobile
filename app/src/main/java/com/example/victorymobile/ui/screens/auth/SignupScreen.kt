@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -19,6 +18,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.victorymobile.helpers.ObserverAsEvents
+import com.example.victorymobile.ui.NavigationEvent
 import com.example.victorymobile.ui.components.form.FormButton
 import com.example.victorymobile.ui.components.form.FormErrorText
 import com.example.victorymobile.ui.components.form.FormFooter
@@ -44,9 +45,13 @@ fun SignupScreen(
 ) {
     val signupState = viewModel.signupState.collectAsStateWithLifecycle()
 
-    LaunchedEffect(signupState.value.isSignupDone) {
-        if (signupState.value.isSignupDone) {
-            onNavigateToLogin()
+    ObserverAsEvents(viewModel.navigationChannel) { event ->
+        when (event) {
+            is NavigationEvent.NavigateToLogin -> {
+                onNavigateToLogin()
+            }
+
+            else -> {}
         }
     }
 

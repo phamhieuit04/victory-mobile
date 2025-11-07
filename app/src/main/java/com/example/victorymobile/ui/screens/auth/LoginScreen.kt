@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -16,6 +15,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.victorymobile.helpers.ObserverAsEvents
+import com.example.victorymobile.ui.NavigationEvent
 import com.example.victorymobile.ui.components.form.FormButton
 import com.example.victorymobile.ui.components.form.FormErrorText
 import com.example.victorymobile.ui.components.form.FormFooter
@@ -34,9 +35,13 @@ fun LoginScreen(
 ) {
     val loginState = viewModel.loginState.collectAsStateWithLifecycle()
 
-    LaunchedEffect(loginState.value.isLoggedIn) {
-        if (loginState.value.isLoggedIn) {
-            onNavigateToHome()
+    ObserverAsEvents(viewModel.navigationChannel) { event ->
+        when (event) {
+            is NavigationEvent.NavigateToHome -> {
+                onNavigateToHome()
+            }
+
+            else -> {}
         }
     }
 
