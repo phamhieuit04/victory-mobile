@@ -19,6 +19,7 @@ fun FormTextField(
     label: String,
     placeholder: String
 ) {
+    Spacer(Modifier.height(12.dp))
     FormLabel(text = label)
     OutlinedTextField(
         modifier = Modifier
@@ -28,5 +29,4 @@ fun FormTextField(
         placeholder = { Text(text = placeholder) },
         shape = RoundedCornerShape(6.dp)
     )
-    Spacer(Modifier.height(12.dp))
 }

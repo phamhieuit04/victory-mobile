@@ -26,6 +26,7 @@ fun FormPasswordField(
     state: TextFieldState,
     label: String
 ) {
+    Spacer(Modifier.height(12.dp))
     FormLabel(text = label)
     val passwordHidden = remember { mutableStateOf(true) }
     OutlinedSecureTextField(
@@ -45,5 +46,4 @@ fun FormPasswordField(
         },
         textObfuscationMode = if (passwordHidden.value) TextObfuscationMode.Hidden else TextObfuscationMode.Visible
     )
-    Spacer(Modifier.height(12.dp))
 }

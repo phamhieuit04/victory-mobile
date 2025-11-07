@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.victorymobile.ui.components.form.FormButton
+import com.example.victorymobile.ui.components.form.FormErrorText
 import com.example.victorymobile.ui.components.form.FormFooter
 import com.example.victorymobile.ui.components.form.FormPasswordField
 import com.example.victorymobile.ui.components.form.FormSocialMethods
@@ -60,6 +61,8 @@ fun LoginScreen(
             LoginForm(
                 emailState = loginState.value.email,
                 passwordState = loginState.value.password,
+                errorMessage = loginState.value.errorMessage,
+                isLoading = loginState.value.isLoading,
                 onSubmit = { viewModel.processLogin() }
             )
         }
@@ -71,6 +74,8 @@ fun LoginForm(
     modifier: Modifier = Modifier,
     emailState: TextFieldState,
     passwordState: TextFieldState,
+    errorMessage: String?,
+    isLoading: Boolean = false,
     onSubmit: () -> Unit
 ) {
     Column() {
@@ -84,7 +89,8 @@ fun LoginForm(
             state = passwordState,
             label = "Mật khẩu"
         )
-        FormButton(onClick = onSubmit, text = "Tiếp theo")
+        if (errorMessage != null) FormErrorText(message = errorMessage)
+        FormButton(onClick = onSubmit, text = "Tiếp theo", isLoading = isLoading)
         FormSocialMethods(text = "Tiếp tục")
     }
 }
