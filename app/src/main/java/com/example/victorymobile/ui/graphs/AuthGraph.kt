@@ -1,5 +1,6 @@
 package com.example.victorymobile.ui.graphs
 
+import android.util.Log
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
@@ -21,11 +22,13 @@ object Signup
 fun NavGraphBuilder.authGraph(modifier: Modifier = Modifier, navController: NavController) {
     navigation<AuthGraph>(startDestination = Login) {
         composable<Login> {
-            LoginScreen(onNavigateToSignUp = {
-                navController.navigate(Signup) {
-                    popUpTo(Login) { inclusive = true }
-                }
-            })
+            LoginScreen(
+                onNavigateToSignUp = {
+                    navController.navigate(Signup) {
+                        popUpTo(Login) { inclusive = true }
+                    }
+                },
+                onNavigateToHome = { Log.i("MyApp", "Navigate to home") })
         }
         composable<Signup> {
             SignupScreen(onNavigateToLogin = {
