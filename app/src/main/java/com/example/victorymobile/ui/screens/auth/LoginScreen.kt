@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -33,6 +34,7 @@ fun LoginScreen(
     onNavigateToSignUp: () -> Unit,
     onNavigateToHome: () -> Unit
 ) {
+    val context = LocalContext.current
     val loginState = viewModel.loginState.collectAsStateWithLifecycle()
 
     ObserverAsEvents(viewModel.navigationChannel) { event ->
@@ -68,7 +70,8 @@ fun LoginScreen(
                 passwordState = loginState.value.password,
                 errorMessage = loginState.value.errorMessage,
                 isLoading = loginState.value.isLoading,
-                onSubmit = { viewModel.processLogin() }
+                onSubmit = { viewModel.processLogin() },
+                onGoogleSignIn = { viewModel.processGoogleSignIn(context = context) }
             )
         }
     }
@@ -81,7 +84,8 @@ fun LoginForm(
     passwordState: TextFieldState,
     errorMessage: String?,
     isLoading: Boolean = false,
-    onSubmit: () -> Unit
+    onSubmit: () -> Unit,
+    onGoogleSignIn: () -> Unit
 ) {
     Column() {
         FormTitle(title = "Chào mừng bạn quay trở lại", fontSize = 38.sp)
@@ -96,6 +100,6 @@ fun LoginForm(
         )
         if (errorMessage != null) FormErrorText(message = errorMessage)
         FormButton(onClick = onSubmit, text = "Tiếp theo", isLoading = isLoading)
-        FormSocialMethods(text = "Tiếp tục")
+        FormSocialMethods(text = "Tiếp tục", onGoogleSignIn = onGoogleSignIn)
     }
 }

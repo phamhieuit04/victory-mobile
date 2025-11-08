@@ -31,11 +31,13 @@ fun NavGraphBuilder.authGraph(modifier: Modifier = Modifier, navController: NavC
                 onNavigateToHome = { Log.i("MyApp", "Navigate to home") })
         }
         composable<Signup> {
-            SignupScreen(onNavigateToLogin = {
-                navController.navigate(Login) {
-                    popUpTo(Signup) { inclusive = true }
-                }
-            })
+            SignupScreen(
+                onNavigateToLogin = {
+                    navController.navigate(Login) {
+                        popUpTo(Signup) { inclusive = true }
+                    }
+                },
+                onNavigateToHome = { Log.i("MyApp", "Navigate to home") })
         }
     }
 }

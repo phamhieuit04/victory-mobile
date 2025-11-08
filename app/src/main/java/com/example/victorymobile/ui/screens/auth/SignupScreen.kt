@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -41,8 +42,10 @@ object StepTwo
 fun SignupScreen(
     modifier: Modifier = Modifier,
     viewModel: AuthViewModel = hiltViewModel<AuthViewModel>(),
-    onNavigateToLogin: () -> Unit
+    onNavigateToLogin: () -> Unit,
+    onNavigateToHome: () -> Unit
 ) {
+    val context = LocalContext.current
     val signupState = viewModel.signupState.collectAsStateWithLifecycle()
 
     ObserverAsEvents(viewModel.navigationChannel) { event ->
@@ -51,7 +54,9 @@ fun SignupScreen(
                 onNavigateToLogin()
             }
 
-            else -> {}
+            is NavigationEvent.NavigateToHome -> {
+                onNavigateToHome()
+            }
         }
     }
 
@@ -79,6 +84,7 @@ fun SignupScreen(
                 passwordState = signupState.value.password,
                 passwordConfirmationState = signupState.value.passwordConfirmation,
                 onSubmit = { viewModel.processSignup() },
+                onGoogleSignIn = { viewModel.processGoogleSignIn(context = context) },
                 isLoading = signupState.value.isLoading,
                 errorMessage = signupState.value.errorMessage
             )
@@ -94,6 +100,7 @@ fun SignupForm(
     passwordState: TextFieldState,
     passwordConfirmationState: TextFieldState,
     onSubmit: () -> Unit,
+    onGoogleSignIn: () -> Unit,
     isLoading: Boolean = false,
     errorMessage: String? = null
 ) {
@@ -120,7 +127,7 @@ fun SignupForm(
                 )
             }
         }
-        FormSocialMethods(text = "Đăng ký")
+        FormSocialMethods(text = "Đăng ký", onGoogleSignIn = onGoogleSignIn)
     }
 }
 

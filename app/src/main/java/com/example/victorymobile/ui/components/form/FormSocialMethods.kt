@@ -22,7 +22,11 @@ import androidx.compose.ui.unit.sp
 import com.example.victorymobile.R
 
 @Composable
-fun FormSocialMethods(modifier: Modifier = Modifier, text: String) {
+fun FormSocialMethods(
+    modifier: Modifier = Modifier,
+    text: String,
+    onGoogleSignIn: () -> Unit
+) {
     Column() {
         Text(
             modifier = Modifier.fillMaxWidth(),
@@ -33,7 +37,7 @@ fun FormSocialMethods(modifier: Modifier = Modifier, text: String) {
         Spacer(Modifier.height(12.dp))
 
         SocialMethodItem(
-            onClick = {},
+            onClick = onGoogleSignIn,
             text = text,
             provider = "Google",
             painter = painterResource(R.drawable.google_logo)
