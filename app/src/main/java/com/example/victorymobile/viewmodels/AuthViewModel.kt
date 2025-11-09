@@ -187,7 +187,6 @@ class AuthViewModel @Inject constructor(
                     }
                     _navigationChannel.send(NavigationEvent.NavigateToHome)
                 }
-
             }
         } catch (e: Exception) {
             Log.e("MyApp", e.toString())

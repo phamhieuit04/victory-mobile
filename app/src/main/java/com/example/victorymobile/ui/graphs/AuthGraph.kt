@@ -1,11 +1,11 @@
 package com.example.victorymobile.ui.graphs
 
-import android.util.Log
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import com.example.victorymobile.ui.MainScreen
 import com.example.victorymobile.ui.screens.auth.LoginScreen
 import com.example.victorymobile.ui.screens.auth.SignupScreen
 import kotlinx.serialization.Serializable
@@ -28,7 +28,8 @@ fun NavGraphBuilder.authGraph(modifier: Modifier = Modifier, navController: NavC
                         popUpTo(Login) { inclusive = true }
                     }
                 },
-                onNavigateToHome = { Log.i("MyApp", "Navigate to home") })
+                onNavigateToHome = { navController.navigate(MainScreen) }
+            )
         }
         composable<Signup> {
             SignupScreen(
@@ -37,7 +38,8 @@ fun NavGraphBuilder.authGraph(modifier: Modifier = Modifier, navController: NavC
                         popUpTo(Signup) { inclusive = true }
                     }
                 },
-                onNavigateToHome = { Log.i("MyApp", "Navigate to home") })
+                onNavigateToHome = { navController.navigate(MainScreen) }
+            )
         }
     }
 }
