@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.HorizontalPager
@@ -22,16 +23,20 @@ import com.example.victorymobile.ui.screens.home.SliderItem
 fun ImagesCarousel(modifier: Modifier = Modifier, sliderItems: List<SliderItem>) {
     val pagerState = rememberPagerState(pageCount = { sliderItems.count() })
 
-    Box(modifier = modifier.padding(start = 16.dp, end = 16.dp, top = 16.dp)) {
+    Box(
+        modifier = modifier
+            .height(200.dp)
+            .padding(start = 16.dp, end = 16.dp, top = 16.dp)
+    ) {
         HorizontalPager(state = pagerState) { index ->
             CarouselItem(item = sliderItems[index])
         }
         Row(
             Modifier
                 .fillMaxSize()
-                .align(Alignment.BottomCenter)
-                .padding(bottom = 8.dp, start = 24.dp),
-            horizontalArrangement = Arrangement.Start
+                .padding(bottom = 8.dp, end = 24.dp),
+            horizontalArrangement = Arrangement.End,
+            verticalAlignment = Alignment.Bottom
         ) {
             repeat(pagerState.pageCount) { iteration ->
                 val color =

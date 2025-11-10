@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.example.victorymobile.ui.AppHeader
@@ -21,7 +22,8 @@ fun DefaultLayout(modifier: Modifier = Modifier) {
 
     Scaffold(
         topBar = { AppHeader() },
-        bottomBar = { AppNavigationBar(navController = navController) }
+        bottomBar = { AppNavigationBar(navController = navController) },
+        containerColor = Color(0xfff5f5f5)
     ) { padding ->
         NavHost(
             modifier = Modifier.padding(paddingValues = padding),

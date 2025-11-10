@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Card
@@ -26,54 +25,46 @@ import androidx.compose.ui.unit.sp
 import com.example.victorymobile.models.Product
 
 @Composable
-fun TopSellerItem(modifier: Modifier = Modifier, item: Product) {
+fun ProductItem(modifier: Modifier = Modifier, item: Product) {
     Card(
-        modifier = Modifier
-            .height(320.dp)
-            .width(240.dp),
-        colors = CardDefaults.cardColors(containerColor = item.backgroundColor as Color),
-        onClick = {}
+        onClick = {},
+        modifier = modifier
+            .height(250.dp)
+            .padding(bottom = 8.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.White),
     ) {
-        Column(
+        Image(
             modifier = Modifier
-                .weight(1f)
-                .padding(start = 20.dp, end = 20.dp, top = 20.dp),
+                .fillMaxWidth()
+                .height(120.dp)
+                .padding(top = 16.dp),
+            contentDescription = "",
+            painter = item.image,
+            alignment = Alignment.Center
+        )
+        Column(
+            modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 20.dp),
         ) {
             Text(
                 text = item.title,
-                fontSize = 18.sp,
+                fontSize = 14.sp,
                 fontWeight = FontWeight.Bold,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis
             )
-            Spacer(Modifier.height(4.dp))
+            Spacer(Modifier.height(3.dp))
             Row() {
                 for (i in 0..item.score) {
                     Icon(
                         contentDescription = "",
                         imageVector = Icons.Default.Star,
                         modifier = Modifier.size(12.dp),
-                        tint = Color.DarkGray
+                        tint = Color(0xffffa132)
                     )
                 }
             }
-            Spacer(Modifier.height(4.dp))
-            Text(
-                text = item.description,
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis,
-                fontSize = 14.sp,
-                lineHeight = 16.sp
-            )
+            Spacer(Modifier.height(8.dp))
+            Text(text = item.price, fontSize = 12.sp)
         }
-        Image(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(180.dp)
-                .padding(bottom = 16.dp),
-            contentDescription = "",
-            painter = item.image,
-            alignment = Alignment.Center
-        )
     }
 }
