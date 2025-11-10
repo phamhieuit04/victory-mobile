@@ -45,7 +45,7 @@ fun AppHeader(modifier: Modifier = Modifier) {
             .heightIn(min = 64.dp)
             .fillMaxWidth()
             .background(color = Color.White)
-            .padding(16.dp)
+            .padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
     ) {
         Row(
             modifier = Modifier
@@ -86,7 +86,7 @@ fun AppHeader(modifier: Modifier = Modifier) {
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(50.dp)
+                            .height(48.dp)
                             .shadow(6.dp)
                             .background(Color.White)
                             .padding(horizontal = 16.dp),

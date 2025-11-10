@@ -28,7 +28,11 @@ fun NavGraphBuilder.authGraph(modifier: Modifier = Modifier, navController: NavC
                         popUpTo(Login) { inclusive = true }
                     }
                 },
-                onNavigateToHome = { navController.navigate(MainScreen) }
+                onNavigateToHome = {
+                    navController.navigate(MainScreen) {
+                        popUpTo(Login) { inclusive = true }
+                    }
+                }
             )
         }
         composable<Signup> {
@@ -38,7 +42,11 @@ fun NavGraphBuilder.authGraph(modifier: Modifier = Modifier, navController: NavC
                         popUpTo(Signup) { inclusive = true }
                     }
                 },
-                onNavigateToHome = { navController.navigate(MainScreen) }
+                onNavigateToHome = {
+                    navController.navigate(MainScreen) {
+                        popUpTo(Signup) { inclusive = true }
+                    }
+                }
             )
         }
     }

@@ -20,7 +20,7 @@ fun DefaultLayout(modifier: Modifier = Modifier) {
     val navController = rememberNavController()
 
     Scaffold(
-        topBar = { AppHeader() },
+        topBar = {  },
         bottomBar = { AppNavigationBar(navController = navController) }
     ) { padding ->
         NavHost(

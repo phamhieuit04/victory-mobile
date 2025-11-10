@@ -42,13 +42,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.victorymobile.states.UiState
 import com.example.victorymobile.ui.graphs.AboutGraph
 import com.example.victorymobile.ui.graphs.CartGraph
 import com.example.victorymobile.ui.graphs.HomeGraph
 import com.example.victorymobile.ui.graphs.ProfileGraph
 import com.example.victorymobile.ui.graphs.ShopGraph
 
-enum class Destination(
+enum class NavDestination(
     val graph: Any,
     val label: String,
     val icon: ImageVector,
@@ -63,7 +64,7 @@ enum class Destination(
 
 @Composable
 fun AppNavigationBar(modifier: Modifier = Modifier, navController: NavController) {
-    var selectedDestination by rememberSaveable { mutableIntStateOf(Destination.HOME.ordinal) }
+    var selectedDestination by rememberSaveable { mutableIntStateOf(NavDestination.HOME.ordinal) }
 
     NavigationBar(
         containerColor = Color.White,
@@ -75,11 +76,14 @@ fun AppNavigationBar(modifier: Modifier = Modifier, navController: NavController
                 .padding(8.dp),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Destination.entries.forEachIndexed { index, destination ->
+            NavDestination.entries.forEachIndexed { index, destination ->
                 AppNavigationBarItem(
                     onClick = {
                         selectedDestination = index
-                        navController.navigate(destination.graph)
+                        navController.navigate(destination.graph) {
+                            popUpTo(UiState.currentNavDestination.graph) { inclusive = true }
+                        }
+                        UiState.currentNavDestination = destination
                     },
                     isSelected = selectedDestination == index,
                     icon = destination.icon,
