@@ -18,7 +18,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.victorymobile.ui.screens.home.SliderItem
 
 @Composable
 fun CarouselItem(modifier: Modifier = Modifier, item: SliderItem) {

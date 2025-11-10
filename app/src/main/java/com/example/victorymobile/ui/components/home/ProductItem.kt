@@ -39,7 +39,7 @@ fun ProductItem(modifier: Modifier = Modifier, item: Product) {
                 .height(120.dp)
                 .padding(top = 16.dp),
             contentDescription = "",
-            painter = item.image,
+            painter = item.thumbnail,
             alignment = Alignment.Center
         )
         Column(

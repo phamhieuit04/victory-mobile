@@ -16,7 +16,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun SectionHeader(modifier: Modifier = Modifier, onClick: () -> Unit, title: String) {
+fun SectionHeader(
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit,
+    title: String,
+    subTitle: String = "Tất cả sản phẩm"
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -27,7 +32,7 @@ fun SectionHeader(modifier: Modifier = Modifier, onClick: () -> Unit, title: Str
         Text(text = title, fontWeight = FontWeight.SemiBold, fontSize = 15.sp)
         TextButton(onClick = onClick) {
             Text(
-                text = "Tất cả sản phẩm",
+                text = subTitle,
                 color = Color.Black.copy(alpha = 0.6f),
                 textDecoration = TextDecoration.Underline,
                 fontSize = 14.sp

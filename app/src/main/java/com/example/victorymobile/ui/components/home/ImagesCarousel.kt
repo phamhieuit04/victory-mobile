@@ -16,8 +16,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.dp
-import com.example.victorymobile.ui.screens.home.SliderItem
+
+data class SliderItem(
+    var label: String = "",
+    var title: String = "",
+    var description: String = "",
+    var image: Painter
+)
 
 @Composable
 fun ImagesCarousel(modifier: Modifier = Modifier, sliderItems: List<SliderItem>) {

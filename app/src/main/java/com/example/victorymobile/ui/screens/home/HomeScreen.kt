@@ -10,22 +10,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.victorymobile.R
+import com.example.victorymobile.models.Category
 import com.example.victorymobile.models.Product
 import com.example.victorymobile.ui.components.home.ImagesCarousel
+import com.example.victorymobile.ui.components.home.ListCategory
 import com.example.victorymobile.ui.components.home.ListProduct
+import com.example.victorymobile.ui.components.home.SliderItem
 import com.example.victorymobile.ui.components.home.TopSellers
-
-data class SliderItem(
-    var label: String = "",
-    var title: String = "",
-    var description: String = "",
-    var image: Painter
-)
 
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier) {
@@ -54,28 +49,28 @@ fun HomeScreen(modifier: Modifier = Modifier) {
             title = "Điện thoại samsung Galaxy S23",
             score = 4,
             description = "Điện thoại Android cao cấp với camera chất lượng và màn hình đẹp.",
-            image = painterResource(R.drawable.iphone_17_pro_max),
+            thumbnail = painterResource(R.drawable.iphone_17_pro_max),
             backgroundColor = Color(0xffd1ecd9)
         ),
         Product(
             title = "Điện thoại samsung Galaxy S23",
             score = 2,
             description = "Điện thoại Android cao cấp với camera chất lượng và màn hình",
-            image = painterResource(R.drawable.iphone_17_pro_max),
+            thumbnail = painterResource(R.drawable.iphone_17_pro_max),
             backgroundColor = Color(0xffc6d8ee)
         ),
         Product(
             title = "Điện thoại samsung Galaxy S23",
             score = 1,
             description = "Điện thoại Android cao cấp với camera chất lượng và màn hình",
-            image = painterResource(R.drawable.iphone_17_pro_max),
+            thumbnail = painterResource(R.drawable.iphone_17_pro_max),
             backgroundColor = Color(0xfff6d5d0)
         ),
         Product(
             title = "Điện thoại samsung Galaxy S23",
             score = 5,
             description = "Điện thoại Android cao cấp với camera chất lượng và màn hình",
-            image = painterResource(R.drawable.iphone_17_pro_max),
+            thumbnail = painterResource(R.drawable.iphone_17_pro_max),
             backgroundColor = Color(0xfffceee3)
         ),
     )
@@ -84,31 +79,53 @@ fun HomeScreen(modifier: Modifier = Modifier) {
             title = "Laptop Gaming Asus ROG",
             score = 5,
             price = "10.000.000đ",
-            image = painterResource(R.drawable.iphone_17_pro_max)
+            thumbnail = painterResource(R.drawable.iphone_17_pro_max)
         ),
         Product(
             title = "Laptop Gaming Asus ROG",
             score = 5,
             price = "10.000.000đ",
-            image = painterResource(R.drawable.iphone_17_pro_max)
+            thumbnail = painterResource(R.drawable.iphone_17_pro_max)
         ),
         Product(
             title = "Laptop Gaming Asus ROG",
             score = 5,
             price = "10.000.000đ",
-            image = painterResource(R.drawable.iphone_17_pro_max)
+            thumbnail = painterResource(R.drawable.iphone_17_pro_max)
         ),
         Product(
             title = "Laptop Gaming Asus ROG",
             score = 5,
             price = "10.000.000đ",
-            image = painterResource(R.drawable.iphone_17_pro_max)
+            thumbnail = painterResource(R.drawable.iphone_17_pro_max)
         ),
         Product(
             title = "Laptop Gaming Asus ROG",
             score = 5,
             price = "10.000.000đ",
-            image = painterResource(R.drawable.iphone_17_pro_max)
+            thumbnail = painterResource(R.drawable.iphone_17_pro_max)
+        )
+    )
+    val listCategory = listOf(
+        Category(
+            title = "Điện thoại",
+            thumbnail = painterResource(R.drawable.iphone_14_pro_in_hand)
+        ),
+        Category(
+            title = "Điện thoại",
+            thumbnail = painterResource(R.drawable.iphone_14_pro_in_hand)
+        ),
+        Category(
+            title = "Điện thoại",
+            thumbnail = painterResource(R.drawable.iphone_14_pro_in_hand)
+        ),
+        Category(
+            title = "Điện thoại",
+            thumbnail = painterResource(R.drawable.iphone_14_pro_in_hand)
+        ),
+        Category(
+            title = "Điện thoại",
+            thumbnail = painterResource(R.drawable.iphone_14_pro_in_hand)
         )
     )
 
@@ -125,6 +142,10 @@ fun HomeScreen(modifier: Modifier = Modifier) {
         Spacer(Modifier.height(18.dp))
 
         ListProduct(products = outstandingProduct)
+        Spacer(Modifier.height(18.dp))
+
+        ListCategory(categories = listCategory)
+        Spacer(Modifier.height(18.dp))
     }
 }
 

@@ -72,7 +72,7 @@ fun TopSellerItem(modifier: Modifier = Modifier, item: Product) {
                 .height(180.dp)
                 .padding(bottom = 16.dp),
             contentDescription = "",
-            painter = item.image,
+            painter = item.thumbnail,
             alignment = Alignment.Center
         )
     }
