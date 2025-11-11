@@ -22,14 +22,10 @@ fun SectionHeader(
     title: String,
     subTitle: String = "Tất cả sản phẩm"
 ) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
+    BasicSectionHeader(
+        title = title,
+        modifier = modifier.padding(horizontal = 16.dp)
     ) {
-        Text(text = title, fontWeight = FontWeight.SemiBold, fontSize = 15.sp)
         TextButton(onClick = onClick) {
             Text(
                 text = subTitle,
@@ -38,5 +34,21 @@ fun SectionHeader(
                 fontSize = 14.sp
             )
         }
+    }
+}
+
+@Composable
+fun BasicSectionHeader(
+    modifier: Modifier = Modifier,
+    title: String = "Sản phẩm",
+    content: @Composable () -> Unit
+) {
+    Row(
+        modifier = modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(text = title, fontWeight = FontWeight.SemiBold, fontSize = 15.sp)
+        content()
     }
 }
