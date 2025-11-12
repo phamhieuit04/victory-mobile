@@ -38,57 +38,69 @@ enum class SortBy(
 }
 
 @Composable
-fun ShopScreen(modifier: Modifier = Modifier) {
+fun ShopScreen(
+    modifier: Modifier = Modifier,
+    onNavigateToProductDetail: (Int) -> Unit
+) {
     val listProduct = listOf(
         Product(
+            id = 0,
             title = "Laptop Gaming Asus ROG",
             score = 5,
             price = "10.000.000đ",
             thumbnail = painterResource(R.drawable.iphone_17_pro_max)
         ),
         Product(
+            id = 1,
             title = "Laptop Gaming Asus ROG",
             score = 5,
             price = "10.000.000đ",
             thumbnail = painterResource(R.drawable.iphone_17_pro_max)
         ),
         Product(
+            id = 2,
             title = "Laptop Gaming Asus ROG",
             score = 5,
             price = "10.000.000đ",
             thumbnail = painterResource(R.drawable.iphone_17_pro_max)
         ),
         Product(
+            id = 3,
             title = "Laptop Gaming Asus ROG",
             score = 5,
             price = "10.000.000đ",
             thumbnail = painterResource(R.drawable.iphone_17_pro_max)
         ),
         Product(
+            id = 4,
             title = "Laptop Gaming Asus ROG",
             score = 5,
             price = "10.000.000đ",
             thumbnail = painterResource(R.drawable.iphone_17_pro_max)
         ),
         Product(
+            id = 5,
             title = "Laptop Gaming Asus ROG",
             score = 5,
             price = "10.000.000đ",
             thumbnail = painterResource(R.drawable.iphone_17_pro_max)
         ),
         Product(
+            id = 6,
             title = "Laptop Gaming Asus ROG",
             score = 5,
             price = "10.000.000đ",
             thumbnail = painterResource(R.drawable.iphone_17_pro_max)
         ),
         Product(
+            id = 7,
             title = "Laptop Gaming Asus ROG",
             score = 5,
             price = "10.000.000đ",
             thumbnail = painterResource(R.drawable.iphone_17_pro_max)
         ),
         Product(
+            id = 8,
             title = "Laptop Gaming Asus ROG",
             score = 5,
             price = "10.000.000đ",
@@ -156,7 +168,9 @@ fun ShopScreen(modifier: Modifier = Modifier) {
             }
         }
         items(listProduct) { product ->
-            ProductItem(item = product)
+            ProductItem(item = product, onClick = {
+                onNavigateToProductDetail(product.id)
+            })
         }
     }
 }

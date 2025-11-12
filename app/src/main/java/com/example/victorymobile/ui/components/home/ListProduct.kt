@@ -14,7 +14,11 @@ import androidx.compose.ui.unit.dp
 import com.example.victorymobile.models.Product
 
 @Composable
-fun ListProduct(modifier: Modifier = Modifier, products: List<Product>) {
+fun ListProduct(
+    onNavigateToProductDetail: (Int) -> Unit,
+    modifier: Modifier = Modifier,
+    products: List<Product>
+) {
     Column(modifier = modifier.fillMaxWidth()) {
         SectionHeader(title = "Sản phẩm nổi bật", onClick = {})
         LazyVerticalGrid(
@@ -24,7 +28,9 @@ fun ListProduct(modifier: Modifier = Modifier, products: List<Product>) {
             contentPadding = PaddingValues(horizontal = 16.dp)
         ) {
             items(products) { item ->
-                ProductItem(item = item)
+                ProductItem(item = item, onClick = {
+                    onNavigateToProductDetail(item.id)
+                })
             }
         }
     }

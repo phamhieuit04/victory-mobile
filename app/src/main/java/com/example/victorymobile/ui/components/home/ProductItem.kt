@@ -23,17 +23,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.victorymobile.R
 import com.example.victorymobile.models.Product
 
 @Composable
-fun ProductItem(modifier: Modifier = Modifier, item: Product) {
+fun ProductItem(onClick: () -> Unit, modifier: Modifier = Modifier, item: Product) {
     Box(
         modifier = modifier
             .width(180.dp)
@@ -41,7 +38,7 @@ fun ProductItem(modifier: Modifier = Modifier, item: Product) {
             .padding(bottom = 8.dp)
             .clip(shape = RoundedCornerShape(16.dp))
             .background(color = Color.White)
-            .clickable(onClick = {})
+            .clickable(onClick = onClick)
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
             Image(
@@ -79,17 +76,4 @@ fun ProductItem(modifier: Modifier = Modifier, item: Product) {
             }
         }
     }
-}
-
-@Preview
-@Composable
-fun Preview(modifier: Modifier = Modifier) {
-    ProductItem(
-        item = Product(
-            title = "Laptop Gaming Asus ROG",
-            score = 5,
-            price = "10.000.000đ",
-            thumbnail = painterResource(R.drawable.iphone_17_pro_max)
-        )
-    )
 }

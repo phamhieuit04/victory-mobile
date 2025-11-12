@@ -17,7 +17,9 @@ object Home
 fun NavGraphBuilder.homeGraph(modifier: Modifier = Modifier, navController: NavController) {
     navigation<HomeGraph>(startDestination = Home) {
         composable<Home> {
-            HomeScreen()
+            HomeScreen(onNavigateToProductDetail = { id ->
+                navController.navigate(ProductDetail(id = id))
+            })
         }
     }
 }

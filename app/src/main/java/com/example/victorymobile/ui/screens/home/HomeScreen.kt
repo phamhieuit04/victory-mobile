@@ -11,7 +11,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.victorymobile.R
 import com.example.victorymobile.models.Category
@@ -23,7 +22,7 @@ import com.example.victorymobile.ui.components.home.SliderItem
 import com.example.victorymobile.ui.components.home.TopSellers
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier) {
+fun HomeScreen(modifier: Modifier = Modifier, onNavigateToProductDetail: (Int) -> Unit) {
     val sliderItems = listOf(
         SliderItem(
             label = "New Arrivals",
@@ -76,30 +75,35 @@ fun HomeScreen(modifier: Modifier = Modifier) {
     )
     val outstandingProduct = listOf(
         Product(
+            id = 0,
             title = "Laptop Gaming Asus ROG",
             score = 5,
             price = "10.000.000đ",
             thumbnail = painterResource(R.drawable.iphone_17_pro_max)
         ),
         Product(
+            id = 1,
             title = "Laptop Gaming Asus ROG",
             score = 5,
             price = "10.000.000đ",
             thumbnail = painterResource(R.drawable.iphone_17_pro_max)
         ),
         Product(
+            id = 2,
             title = "Laptop Gaming Asus ROG",
             score = 5,
             price = "10.000.000đ",
             thumbnail = painterResource(R.drawable.iphone_17_pro_max)
         ),
         Product(
+            id = 3,
             title = "Laptop Gaming Asus ROG",
             score = 5,
             price = "10.000.000đ",
             thumbnail = painterResource(R.drawable.iphone_17_pro_max)
         ),
         Product(
+            id = 4,
             title = "Laptop Gaming Asus ROG",
             score = 5,
             price = "10.000.000đ",
@@ -141,16 +145,13 @@ fun HomeScreen(modifier: Modifier = Modifier) {
         TopSellers(topSellerProducts = topSellerProducts)
         Spacer(Modifier.height(18.dp))
 
-        ListProduct(products = outstandingProduct)
+        ListProduct(
+            products = outstandingProduct,
+            onNavigateToProductDetail = onNavigateToProductDetail
+        )
         Spacer(Modifier.height(18.dp))
 
         ListCategory(categories = listCategory)
         Spacer(Modifier.height(18.dp))
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun Preview(modifier: Modifier = Modifier) {
-    HomeScreen()
 }
