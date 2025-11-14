@@ -26,7 +26,10 @@ import androidx.compose.ui.unit.sp
 import com.example.victorymobile.models.Category
 
 @Composable
-fun ListCategory(modifier: Modifier = Modifier, categories: List<Category>) {
+fun ListCategory(
+    modifier: Modifier = Modifier,
+    categories: List<Category>
+) {
     Column(modifier = modifier.fillMaxWidth()) {
         SectionHeader(onClick = {}, title = "Danh mục", subTitle = "Xem thêm")
         LazyRow(
@@ -36,7 +39,7 @@ fun ListCategory(modifier: Modifier = Modifier, categories: List<Category>) {
             items(categories) { item ->
                 Column(
                     modifier = Modifier.clickable(
-                        onClick = {},
+                        onClick = { },
                         indication = null,
                         interactionSource = remember { MutableInteractionSource() },
                     ),

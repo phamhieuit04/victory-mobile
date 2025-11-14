@@ -14,7 +14,11 @@ import androidx.compose.ui.unit.dp
 import com.example.victorymobile.models.Product
 
 @Composable
-fun TopSellers(modifier: Modifier = Modifier, topSellerProducts: List<Product>) {
+fun TopSellers(
+    modifier: Modifier = Modifier,
+    topSellerProducts: List<Product>,
+    onNavigateToProductDetail: (Int) -> Unit
+) {
     Column(modifier = modifier.fillMaxWidth()) {
         SectionHeader(title = "Sản phẩm bán chạy", onClick = {})
         Spacer(Modifier.height(2.dp))
@@ -23,7 +27,7 @@ fun TopSellers(modifier: Modifier = Modifier, topSellerProducts: List<Product>) 
             contentPadding = PaddingValues(start = 16.dp, end = 16.dp)
         ) {
             items(topSellerProducts) { product ->
-                TopSellerItem(item = product)
+                TopSellerItem(item = product, onClick = { onNavigateToProductDetail(product.id) })
             }
         }
     }

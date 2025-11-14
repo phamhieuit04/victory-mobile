@@ -22,7 +22,10 @@ import com.example.victorymobile.ui.components.home.SliderItem
 import com.example.victorymobile.ui.components.home.TopSellers
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier, onNavigateToProductDetail: (Int) -> Unit) {
+fun HomeScreen(
+    modifier: Modifier = Modifier,
+    onNavigateToProductDetail: (Int) -> Unit,
+) {
     val sliderItems = listOf(
         SliderItem(
             label = "New Arrivals",
@@ -142,7 +145,10 @@ fun HomeScreen(modifier: Modifier = Modifier, onNavigateToProductDetail: (Int) -
         ImagesCarousel(sliderItems = sliderItems)
         Spacer(Modifier.height(18.dp))
 
-        TopSellers(topSellerProducts = topSellerProducts)
+        TopSellers(
+            topSellerProducts = topSellerProducts,
+            onNavigateToProductDetail = onNavigateToProductDetail
+        )
         Spacer(Modifier.height(18.dp))
 
         ListProduct(

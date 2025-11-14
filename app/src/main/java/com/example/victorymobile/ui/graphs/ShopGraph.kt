@@ -30,7 +30,9 @@ fun NavGraphBuilder.shopGraph(modifier: Modifier = Modifier, navController: NavC
         }
         composable<ProductDetail> { entry ->
             val productDetail = entry.toRoute<ProductDetail>()
-            ProductDetailScreen(id = productDetail.id)
+            ProductDetailScreen(id = productDetail.id, onNavigateToProductDetail = {
+                navController.navigate(ProductDetail(id = productDetail.id))
+            })
         }
     }
 }

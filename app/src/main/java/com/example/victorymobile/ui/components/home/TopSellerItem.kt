@@ -26,13 +26,13 @@ import androidx.compose.ui.unit.sp
 import com.example.victorymobile.models.Product
 
 @Composable
-fun TopSellerItem(modifier: Modifier = Modifier, item: Product) {
+fun TopSellerItem(onClick: () -> Unit, modifier: Modifier = Modifier, item: Product) {
     Card(
         modifier = Modifier
             .height(320.dp)
             .width(240.dp),
         colors = CardDefaults.cardColors(containerColor = item.backgroundColor as Color),
-        onClick = {}
+        onClick = onClick
     ) {
         Column(
             modifier = Modifier
