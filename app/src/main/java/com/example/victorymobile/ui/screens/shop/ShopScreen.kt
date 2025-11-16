@@ -153,6 +153,7 @@ fun ShopScreen(
         item(span = { GridItemSpan(2) }) {
             BasicSectionHeader(modifier = Modifier.padding(bottom = 8.dp)) {
                 SortByButton(
+                    title = sortByItems[selected].title,
                     onClickButton = { expanded = !expanded },
                     onClickItem = { expanded = !expanded },
                     expanded = expanded,

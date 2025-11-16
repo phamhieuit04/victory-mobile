@@ -25,6 +25,7 @@ import com.example.victorymobile.ui.components.home.TopSellers
 fun HomeScreen(
     modifier: Modifier = Modifier,
     onNavigateToProductDetail: (Int) -> Unit,
+    onNavigateToShop: () -> Unit
 ) {
     val sliderItems = listOf(
         SliderItem(
@@ -147,17 +148,19 @@ fun HomeScreen(
 
         TopSellers(
             topSellerProducts = topSellerProducts,
-            onNavigateToProductDetail = onNavigateToProductDetail
+            onNavigateToProductDetail = onNavigateToProductDetail,
+            onNavigateToShop = onNavigateToShop
         )
         Spacer(Modifier.height(18.dp))
 
         ListProduct(
             products = outstandingProduct,
-            onNavigateToProductDetail = onNavigateToProductDetail
+            onNavigateToProductDetail = onNavigateToProductDetail,
+            onNavigateToShop = onNavigateToShop
         )
         Spacer(Modifier.height(18.dp))
 
-        ListCategory(categories = listCategory)
+        ListCategory(categories = listCategory, onNavigateToShop = onNavigateToShop)
         Spacer(Modifier.height(18.dp))
     }
 }

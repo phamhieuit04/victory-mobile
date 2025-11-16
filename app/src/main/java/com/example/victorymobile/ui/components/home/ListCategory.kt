@@ -28,10 +28,11 @@ import com.example.victorymobile.models.Category
 @Composable
 fun ListCategory(
     modifier: Modifier = Modifier,
-    categories: List<Category>
+    categories: List<Category>,
+    onNavigateToShop: () -> Unit
 ) {
     Column(modifier = modifier.fillMaxWidth()) {
-        SectionHeader(onClick = {}, title = "Danh mục", subTitle = "Xem thêm")
+        SectionHeader(onClick = onNavigateToShop, title = "Danh mục", subTitle = "Xem thêm")
         LazyRow(
             horizontalArrangement = Arrangement.spacedBy(20.dp),
             contentPadding = PaddingValues(horizontal = 16.dp)

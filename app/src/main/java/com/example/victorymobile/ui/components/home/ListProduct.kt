@@ -16,11 +16,12 @@ import com.example.victorymobile.models.Product
 @Composable
 fun ListProduct(
     onNavigateToProductDetail: (Int) -> Unit,
+    onNavigateToShop: () -> Unit,
     modifier: Modifier = Modifier,
     products: List<Product>
 ) {
     Column(modifier = modifier.fillMaxWidth()) {
-        SectionHeader(title = "Sản phẩm nổi bật", onClick = {})
+        SectionHeader(title = "Sản phẩm nổi bật", onClick = onNavigateToShop)
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
             modifier = Modifier.heightIn(max = 2000.dp),

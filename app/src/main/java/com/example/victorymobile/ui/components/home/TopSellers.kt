@@ -17,10 +17,11 @@ import com.example.victorymobile.models.Product
 fun TopSellers(
     modifier: Modifier = Modifier,
     topSellerProducts: List<Product>,
-    onNavigateToProductDetail: (Int) -> Unit
+    onNavigateToProductDetail: (Int) -> Unit,
+    onNavigateToShop: () -> Unit
 ) {
     Column(modifier = modifier.fillMaxWidth()) {
-        SectionHeader(title = "Sản phẩm bán chạy", onClick = {})
+        SectionHeader(title = "Sản phẩm bán chạy", onClick = onNavigateToShop)
         Spacer(Modifier.height(2.dp))
         LazyRow(
             horizontalArrangement = Arrangement.spacedBy(16.dp),

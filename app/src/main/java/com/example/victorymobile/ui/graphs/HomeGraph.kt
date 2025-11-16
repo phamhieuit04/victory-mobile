@@ -20,6 +20,9 @@ fun NavGraphBuilder.homeGraph(modifier: Modifier = Modifier, navController: NavC
             HomeScreen(
                 onNavigateToProductDetail = { id ->
                     navController.navigate(ProductDetail(id = id))
+                },
+                onNavigateToShop = {
+                    navController.navigate(Shop)
                 }
             )
         }
