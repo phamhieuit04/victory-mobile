@@ -4,6 +4,8 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -44,14 +46,13 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.victorymobile.R
 import com.example.victorymobile.models.Product
 
 @Composable
-fun CartScreen(modifier: Modifier = Modifier) {
+fun CartScreen(modifier: Modifier = Modifier, onNavigateToProductDetail: (Int) -> Unit) {
     val topSellerProducts = listOf(
         Product(
             title = "Điện thoại samsung Galaxy S23",
@@ -99,6 +100,11 @@ fun CartScreen(modifier: Modifier = Modifier) {
                         .clip(shape = RoundedCornerShape(12.dp))
                         .background(color = Color.White)
                         .padding(top = 16.dp, end = 16.dp, start = 4.dp, bottom = 16.dp)
+                        .clickable(
+                            onClick = { onNavigateToProductDetail(index) },
+                            indication = null,
+                            interactionSource = remember { MutableInteractionSource() }
+                        )
                 ) {
                     Checkbox(
                         checked = checked,
@@ -223,10 +229,4 @@ fun CartScreen(modifier: Modifier = Modifier) {
             containerColor = Color(0xff2d41d9)
         )
     }
-}
-
-@Preview(device = "id:pixel_3", showBackground = true, backgroundColor = 0xfffaf9fd)
-@Composable
-fun Preview(modifier: Modifier = Modifier) {
-    CartScreen()
 }

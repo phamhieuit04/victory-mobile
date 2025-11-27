@@ -17,7 +17,9 @@ object Cart
 fun NavGraphBuilder.cartGraph(modifier: Modifier = Modifier, navController: NavController) {
     navigation<CartGraph>(startDestination = Cart) {
         composable<Cart> {
-            CartScreen()
+            CartScreen(onNavigateToProductDetail = { id ->
+                navController.navigate(ProductDetail(id = id))
+            })
         }
     }
 }
