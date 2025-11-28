@@ -12,18 +12,20 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ProductDetailImage(modifier: Modifier = Modifier, painter: Painter) {
+fun ProductDetailImage(modifier: Modifier = Modifier, painter: Painter?) {
     Box(
         modifier = Modifier
             .fillMaxSize()
             .height(260.dp),
         contentAlignment = Alignment.Center
     ) {
-        Image(
-            modifier = Modifier.fillMaxSize(),
-            painter = painter,
-            contentDescription = "",
-            contentScale = ContentScale.Fit
-        )
+        if (painter != null) {
+            Image(
+                modifier = Modifier.fillMaxSize(),
+                painter = painter,
+                contentDescription = "",
+                contentScale = ContentScale.Fit
+            )
+        }
     }
 }

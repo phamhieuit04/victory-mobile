@@ -41,15 +41,17 @@ fun ProductItem(onClick: () -> Unit, modifier: Modifier = Modifier, item: Produc
             .clickable(onClick = onClick)
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
-            Image(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(120.dp)
-                    .padding(top = 16.dp),
-                contentDescription = "",
-                painter = item.thumbnail,
-                alignment = Alignment.Center
-            )
+            item.thumbnail?.let {
+                Image(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(120.dp)
+                        .padding(top = 16.dp),
+                    contentDescription = "",
+                    painter = it,
+                    alignment = Alignment.Center
+                )
+            }
             Column(
                 modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 20.dp),
             ) {

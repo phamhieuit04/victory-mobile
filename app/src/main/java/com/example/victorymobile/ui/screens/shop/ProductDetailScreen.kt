@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import com.example.victorymobile.R
 import com.example.victorymobile.models.Feedback
 import com.example.victorymobile.models.Product
+import com.example.victorymobile.states.CartState
 import com.example.victorymobile.ui.components.shop.ProductDetailButtons
 import com.example.victorymobile.ui.components.shop.ProductDetailFeedback
 import com.example.victorymobile.ui.components.shop.ProductDetailFeedbackHeader
@@ -28,6 +29,7 @@ import com.example.victorymobile.ui.components.shop.ProductDetailImage
 import com.example.victorymobile.ui.components.shop.ProductDetailInformation
 import com.example.victorymobile.ui.components.shop.ProductDetailQuantity
 import com.example.victorymobile.ui.components.shop.SimilarProducts
+import com.example.victorymobile.ui.screens.cart.CartItem
 
 @Composable
 fun ProductDetailScreen(
@@ -118,7 +120,16 @@ fun ProductDetailScreen(
                 })
         }
         item {
-            ProductDetailButtons(onAddToCart = {}, onNavigateToCheckOut = {})
+            ProductDetailButtons(
+                onAddToCart = {
+                    CartState.currentCart.add(
+                        CartItem(
+                            quantity = mutableIntStateOf(quantity),
+                            product = product
+                        )
+                    )
+                },
+                onNavigateToCheckOut = {})
         }
         item {
             Spacer(Modifier.height(16.dp))

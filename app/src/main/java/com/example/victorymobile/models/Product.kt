@@ -9,6 +9,7 @@ data class Product(
     var score: Int = 0,
     var description: String = "",
     var price: String = "",
-    var thumbnail: Painter,
-    var backgroundColor: Color? = null
+    var thumbnail: Painter? = null,
+    var backgroundColor: Color? = null,
+    var quantity: Int? = null
 )

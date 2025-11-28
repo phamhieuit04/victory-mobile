@@ -33,10 +33,11 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedIconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.MutableIntState
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -50,50 +51,19 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.victorymobile.R
 import com.example.victorymobile.models.Product
+import com.example.victorymobile.states.CartState
+
+data class CartItem(
+    var isSelected: MutableState<Boolean> = mutableStateOf(false),
+    val product: Product,
+    var quantity: MutableIntState = mutableIntStateOf(1)
+)
 
 @Composable
 fun CartScreen(modifier: Modifier = Modifier, onNavigateToProductDetail: (Int) -> Unit) {
-    val topSellerProducts = listOf(
-        Product(
-            title = "Điện thoại samsung Galaxy S23",
-            score = 4,
-            description = "Điện thoại Android cao cấp với camera chất lượng và màn hình đẹp.",
-            thumbnail = painterResource(R.drawable.iphone_17_pro_max),
-            backgroundColor = Color(0xffd1ecd9),
-            price = "10.000.000đ"
-        ),
-        Product(
-            title = "Điện thoại samsung Galaxy S23",
-            score = 2,
-            description = "Điện thoại Android cao cấp với camera chất lượng và màn hình",
-            thumbnail = painterResource(R.drawable.iphone_17_pro_max),
-            backgroundColor = Color(0xffc6d8ee),
-            price = "10.000.000đ"
-        ),
-        Product(
-            title = "Điện thoại samsung Galaxy S23",
-            score = 1,
-            description = "Điện thoại Android cao cấp với camera chất lượng và màn hình",
-            thumbnail = painterResource(R.drawable.iphone_17_pro_max),
-            backgroundColor = Color(0xfff6d5d0),
-            price = "10.000.000đ"
-        ),
-        Product(
-            title = "Điện thoại samsung Galaxy S23",
-            score = 5,
-            description = "Điện thoại Android cao cấp với camera chất lượng và màn hình",
-            thumbnail = painterResource(R.drawable.iphone_17_pro_max),
-            backgroundColor = Color(0xfffceee3),
-            price = "10.000.000đ"
-        ),
-    )
-    val selectedProduct = mutableListOf<Product>()
-
     Box(modifier = Modifier.fillMaxSize()) {
         LazyColumn(contentPadding = PaddingValues(16.dp)) {
-            itemsIndexed(topSellerProducts) { index, product ->
-                var checked by remember { mutableStateOf(false) }
-
+            itemsIndexed(CartState.currentCart) { index, cartItem ->
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -107,11 +77,9 @@ fun CartScreen(modifier: Modifier = Modifier, onNavigateToProductDetail: (Int) -
                         )
                 ) {
                     Checkbox(
-                        checked = checked,
+                        checked = cartItem.isSelected.value,
                         onCheckedChange = { value ->
-                            checked = value
-                            if (value) selectedProduct.add(product)
-                            else selectedProduct.remove(product)
+                            cartItem.isSelected.value = value
                         }
                     )
 
@@ -122,7 +90,7 @@ fun CartScreen(modifier: Modifier = Modifier, onNavigateToProductDetail: (Int) -
                             .size(96.dp)
                             .clip(shape = RoundedCornerShape(6.dp)),
                         contentDescription = "",
-                        painter = product.thumbnail,
+                        painter = painterResource(R.drawable.iphone_17_pro_max),
                         contentScale = ContentScale.Crop
                     )
 
@@ -133,7 +101,7 @@ fun CartScreen(modifier: Modifier = Modifier, onNavigateToProductDetail: (Int) -
                         verticalArrangement = Arrangement.SpaceBetween
                     ) {
                         Text(
-                            text = product.title,
+                            text = cartItem.product.title,
                             fontWeight = FontWeight.Medium,
                             fontSize = 14.sp,
                             maxLines = 1,
@@ -142,7 +110,7 @@ fun CartScreen(modifier: Modifier = Modifier, onNavigateToProductDetail: (Int) -
                             color = Color.DarkGray.copy(alpha = 0.8f)
                         )
                         Text(
-                            text = product.price,
+                            text = cartItem.product.price,
                             fontWeight = FontWeight.Bold,
                             color = Color.Red,
                             fontSize = 20.sp,
@@ -165,7 +133,10 @@ fun CartScreen(modifier: Modifier = Modifier, onNavigateToProductDetail: (Int) -
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
                                 OutlinedIconButton(
-                                    onClick = { },
+                                    onClick = {
+                                        if (cartItem.quantity.intValue > 1) cartItem.quantity.intValue -= 1
+                                        else CartState.currentCart.removeAt(index)
+                                    },
                                     modifier = Modifier.size(18.dp),
                                     border = BorderStroke(width = 1.dp, color = Color.LightGray),
                                     shape = RectangleShape
@@ -177,13 +148,13 @@ fun CartScreen(modifier: Modifier = Modifier, onNavigateToProductDetail: (Int) -
                                     )
                                 }
                                 Text(
-                                    text = 1.toString(),
+                                    text = cartItem.quantity.intValue.toString(),
                                     fontSize = 18.sp,
                                     fontWeight = FontWeight.Bold,
                                     color = Color.DarkGray
                                 )
                                 OutlinedIconButton(
-                                    onClick = { },
+                                    onClick = { cartItem.quantity.intValue += 1 },
                                     modifier = Modifier.size(18.dp),
                                     border = BorderStroke(width = 1.dp, color = Color.LightGray),
                                     shape = RectangleShape
@@ -195,7 +166,7 @@ fun CartScreen(modifier: Modifier = Modifier, onNavigateToProductDetail: (Int) -
                                     )
                                 }
                             }
-                            IconButton(onClick = {}) {
+                            IconButton(onClick = { CartState.currentCart.removeAt(index) }) {
                                 Icon(
                                     contentDescription = "",
                                     imageVector = Icons.Default.Delete,

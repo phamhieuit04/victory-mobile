@@ -66,14 +66,16 @@ fun TopSellerItem(onClick: () -> Unit, modifier: Modifier = Modifier, item: Prod
                 lineHeight = 16.sp
             )
         }
-        Image(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(180.dp)
-                .padding(bottom = 16.dp),
-            contentDescription = "",
-            painter = item.thumbnail,
-            alignment = Alignment.Center
-        )
+        item.thumbnail?.let {
+            Image(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(180.dp)
+                    .padding(bottom = 16.dp),
+                contentDescription = "",
+                painter = it,
+                alignment = Alignment.Center
+            )
+        }
     }
 }
