@@ -85,6 +85,8 @@ fun CartScreen(
                         checked = cartItem.isSelected.value,
                         onCheckedChange = { value ->
                             cartItem.isSelected.value = value
+                            if (value) CartState.selectedItems.add(cartItem)
+                            else CartState.selectedItems.remove(cartItem)
                         }
                     )
 
@@ -194,14 +196,7 @@ fun CartScreen(
                 .align(alignment = Alignment.BottomEnd)
                 .padding(16.dp),
             onClick = {
-                var canCheckout = 0
-                CartState.currentCart.forEach { cartItem ->
-                    if (cartItem.isSelected.value) {
-                        canCheckout += 1
-                    }
-                }
-
-                if (canCheckout >= 1) {
+                if (!CartState.selectedItems.isEmpty()) {
                     UiState.displayTopBar.value = false
                     UiState.displayBottomBar.value = false
                     onNavigateToCheckout()

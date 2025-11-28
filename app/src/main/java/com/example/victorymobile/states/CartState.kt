@@ -5,4 +5,5 @@ import com.example.victorymobile.ui.screens.cart.CartItem
 
 object CartState {
     val currentCart = mutableStateListOf<CartItem>()
+    val selectedItems = mutableStateListOf<CartItem>()
 }
