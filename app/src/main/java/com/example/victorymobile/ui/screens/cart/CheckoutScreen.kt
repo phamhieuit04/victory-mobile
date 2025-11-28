@@ -16,18 +16,23 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.material3.Button
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -68,6 +73,9 @@ fun CheckoutScreen(
     }
 
     val navController = rememberNavController()
+    val radioOptions = listOf("Thanh toán online", "Thanh toán khi nhận hàng (COD)")
+    val (selectedOption, onOptionSelected) = remember { mutableStateOf(radioOptions[0]) }
+
     NavHost(navController = navController, startDestination = StepOne) {
         composable<StepOne> {
             Column(modifier = Modifier.padding(16.dp)) {
@@ -102,13 +110,63 @@ fun CheckoutScreen(
         }
         composable<StepTwo> {
             Scaffold(bottomBar = {
+                Column(modifier = Modifier.padding(16.dp)) {
+                    Text(
+                        text = "Phương thức thanh toán",
+                        fontSize = 16.sp,
+                        lineHeight = 16.sp,
+                        fontWeight = FontWeight.SemiBold
+                    )
 
+                    Spacer(Modifier.height(6.dp))
+
+                    radioOptions.forEach { text ->
+                        Row(
+                            Modifier
+                                .fillMaxWidth()
+                                .height(32.dp)
+                                .selectable(
+                                    selected = (text == selectedOption),
+                                    onClick = { onOptionSelected(text) },
+                                    role = Role.RadioButton
+                                ),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            RadioButton(
+                                selected = (text == selectedOption),
+                                onClick = null
+                            )
+                            Text(
+                                text = text,
+                                modifier = Modifier.padding(start = 16.dp)
+                            )
+                        }
+                    }
+
+                    Spacer(Modifier.height(12.dp))
+
+                    Text(
+                        text = "Tổng giá trị: 10.000.000đ",
+                        fontSize = 16.sp,
+                        lineHeight = 16.sp,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                    Spacer(Modifier.height(12.dp))
+                    Button(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(52.dp),
+                        onClick = { }
+                    ) {
+                        Text(text = "Thanh toán")
+                    }
+                }
             }) { padding ->
                 if (productId != null) {
                     LazyColumn(
                         modifier = Modifier
                             .padding(padding)
-                            .padding(16.dp)
+                            .padding(horizontal = 16.dp)
                     ) {
                         item {
                             FormTitle(title = "Sản phẩm", fontSize = 32.sp)
@@ -133,7 +191,7 @@ fun CheckoutScreen(
                     LazyColumn(
                         modifier = Modifier
                             .padding(padding)
-                            .padding(16.dp)
+                            .padding(horizontal = 16.dp)
                     ) {
                         item {
                             FormTitle(title = "Danh sách sản phẩm", fontSize = 32.sp)
