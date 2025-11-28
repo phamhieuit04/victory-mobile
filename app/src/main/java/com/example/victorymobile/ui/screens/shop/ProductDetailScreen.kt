@@ -16,12 +16,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.victorymobile.R
 import com.example.victorymobile.models.Feedback
 import com.example.victorymobile.models.Product
 import com.example.victorymobile.states.CartState
+import com.example.victorymobile.states.UiState
 import com.example.victorymobile.ui.components.shop.ProductDetailButtons
 import com.example.victorymobile.ui.components.shop.ProductDetailFeedback
 import com.example.victorymobile.ui.components.shop.ProductDetailFeedbackHeader
@@ -34,6 +34,7 @@ import com.example.victorymobile.ui.screens.cart.CartItem
 @Composable
 fun ProductDetailScreen(
     onNavigateToProductDetail: (Int) -> Unit,
+    onNavigateToCheckout: (Int) -> Unit,
     modifier: Modifier = Modifier,
     id: Int
 ) {
@@ -129,7 +130,12 @@ fun ProductDetailScreen(
                         )
                     )
                 },
-                onNavigateToCheckOut = {})
+                onNavigateToCheckout = {
+                    UiState.displayTopBar.value = false
+                    UiState.displayBottomBar.value = false
+                    onNavigateToCheckout(product.id)
+                }
+            )
         }
         item {
             Spacer(Modifier.height(16.dp))
@@ -145,10 +151,4 @@ fun ProductDetailScreen(
             )
         }
     }
-}
-
-@Preview(device = "id:pixel_3", showBackground = true, backgroundColor = 0xffffffff)
-@Composable
-fun Preview(modifier: Modifier = Modifier) {
-    ProductDetailScreen(onNavigateToProductDetail = {}, id = 1)
 }

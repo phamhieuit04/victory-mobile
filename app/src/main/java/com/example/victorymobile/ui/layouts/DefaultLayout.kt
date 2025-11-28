@@ -7,6 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
+import com.example.victorymobile.states.UiState
 import com.example.victorymobile.ui.AppHeader
 import com.example.victorymobile.ui.AppNavigationBar
 import com.example.victorymobile.ui.graphs.HomeGraph
@@ -21,8 +22,8 @@ fun DefaultLayout(modifier: Modifier = Modifier) {
     val navController = rememberNavController()
 
     Scaffold(
-        topBar = { AppHeader() },
-        bottomBar = { AppNavigationBar(navController = navController) },
+        topBar = { if (UiState.displayTopBar.value) AppHeader() },
+        bottomBar = { if (UiState.displayBottomBar.value) AppNavigationBar(navController = navController) },
         containerColor = Color(0xfff5f5f5)
     ) { padding ->
         NavHost(

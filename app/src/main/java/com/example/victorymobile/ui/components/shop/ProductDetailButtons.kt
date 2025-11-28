@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 fun ProductDetailButtons(
     modifier: Modifier = Modifier,
     onAddToCart: () -> Unit,
-    onNavigateToCheckOut: () -> Unit
+    onNavigateToCheckout: () -> Unit
 ) {
     Spacer(Modifier.height(16.dp))
 
@@ -31,7 +31,7 @@ fun ProductDetailButtons(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(52.dp),
-            onClick = onNavigateToCheckOut,
+            onClick = onNavigateToCheckout,
             shape = RectangleShape,
             border = BorderStroke(width = 2.dp, color = Color(0xff3449ca))
         ) {

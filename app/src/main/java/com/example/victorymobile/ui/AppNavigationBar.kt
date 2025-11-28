@@ -84,6 +84,8 @@ fun AppNavigationBar(modifier: Modifier = Modifier, navController: NavController
                             popUpTo(UiState.currentNavDestination.value.graph) { inclusive = true }
                         }
                         UiState.currentNavDestination.value = destination
+                        UiState.displayTopBar.value = true
+                        UiState.displayBottomBar.value = true
                     },
                     isSelected = selectedDestination == index,
                     icon = destination.icon,

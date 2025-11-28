@@ -52,6 +52,7 @@ import androidx.compose.ui.unit.sp
 import com.example.victorymobile.R
 import com.example.victorymobile.models.Product
 import com.example.victorymobile.states.CartState
+import com.example.victorymobile.states.UiState
 
 data class CartItem(
     var isSelected: MutableState<Boolean> = mutableStateOf(false),
@@ -60,7 +61,11 @@ data class CartItem(
 )
 
 @Composable
-fun CartScreen(modifier: Modifier = Modifier, onNavigateToProductDetail: (Int) -> Unit) {
+fun CartScreen(
+    modifier: Modifier = Modifier,
+    onNavigateToProductDetail: (Int) -> Unit,
+    onNavigateToCheckout: () -> Unit
+) {
     Box(modifier = Modifier.fillMaxSize()) {
         LazyColumn(contentPadding = PaddingValues(16.dp)) {
             itemsIndexed(CartState.currentCart) { index, cartItem ->
@@ -188,7 +193,20 @@ fun CartScreen(modifier: Modifier = Modifier, onNavigateToProductDetail: (Int) -
             modifier = Modifier
                 .align(alignment = Alignment.BottomEnd)
                 .padding(16.dp),
-            onClick = { },
+            onClick = {
+                var canCheckout = 0
+                CartState.currentCart.forEach { cartItem ->
+                    if (cartItem.isSelected.value) {
+                        canCheckout += 1
+                    }
+                }
+
+                if (canCheckout >= 1) {
+                    UiState.displayTopBar.value = false
+                    UiState.displayBottomBar.value = false
+                    onNavigateToCheckout()
+                }
+            },
             icon = {
                 Icon(
                     imageVector = Icons.Filled.Payment,
