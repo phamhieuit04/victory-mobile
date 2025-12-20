@@ -44,12 +44,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.victorymobile.R
 import com.example.victorymobile.models.Product
 import com.example.victorymobile.states.CartState
 import com.example.victorymobile.states.UiState
@@ -92,14 +90,16 @@ fun CartScreen(
 
                     Spacer(Modifier.width(4.dp))
 
-                    Image(
-                        modifier = Modifier
-                            .size(96.dp)
-                            .clip(shape = RoundedCornerShape(6.dp)),
-                        contentDescription = "",
-                        painter = painterResource(R.drawable.iphone_17_pro_max),
-                        contentScale = ContentScale.Crop
-                    )
+                    cartItem.product.thumbnail?.let {
+                        Image(
+                            modifier = Modifier
+                                .size(96.dp)
+                                .clip(shape = RoundedCornerShape(6.dp)),
+                            contentDescription = "",
+                            painter = it,
+                            contentScale = ContentScale.Crop
+                        )
+                    }
 
                     Spacer(Modifier.width(12.dp))
 
@@ -112,7 +112,7 @@ fun CartScreen(
                             fontWeight = FontWeight.Medium,
                             fontSize = 14.sp,
                             maxLines = 1,
-                            overflow = TextOverflow.Clip,
+                            overflow = TextOverflow.Ellipsis,
                             lineHeight = 18.sp,
                             color = Color.DarkGray.copy(alpha = 0.8f)
                         )
