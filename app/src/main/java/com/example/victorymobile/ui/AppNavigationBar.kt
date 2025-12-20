@@ -15,12 +15,10 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.ShoppingBag
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.outlined.Home
-import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.ShoppingBag
 import androidx.compose.material.icons.outlined.ShoppingCart
 import androidx.compose.material3.Icon
@@ -43,7 +41,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.victorymobile.states.UiState
-import com.example.victorymobile.ui.graphs.AboutGraph
 import com.example.victorymobile.ui.graphs.CartGraph
 import com.example.victorymobile.ui.graphs.HomeGraph
 import com.example.victorymobile.ui.graphs.ProfileGraph
@@ -59,7 +56,6 @@ enum class NavDestination(
     SHOP(ShopGraph, "Sản phẩm", Icons.Outlined.ShoppingBag, Icons.Default.ShoppingBag),
     CART(CartGraph, "Giỏ hàng", Icons.Outlined.ShoppingCart, Icons.Default.ShoppingCart),
     PROFILE(ProfileGraph, "Hồ sơ", Icons.Outlined.AccountCircle, Icons.Default.AccountCircle),
-    ABOUT(AboutGraph, "Giới thiệu", Icons.Outlined.Info, Icons.Default.Info),
 }
 
 @Composable

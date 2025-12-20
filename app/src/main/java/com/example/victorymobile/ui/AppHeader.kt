@@ -33,7 +33,6 @@ fun AppHeader(modifier: Modifier = Modifier) {
             NavDestination.SHOP -> true
             NavDestination.CART -> false
             NavDestination.PROFILE -> false
-            NavDestination.ABOUT -> false
         }
     }
 
