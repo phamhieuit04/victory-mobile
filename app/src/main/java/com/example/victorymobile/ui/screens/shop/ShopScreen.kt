@@ -46,92 +46,92 @@ fun ShopScreen(
         Product(
             id = 0,
             title = "Laptop Gaming Asus ROG",
-            score = 5,
-            price = "10.000.000đ",
-            thumbnail = painterResource(R.drawable.iphone_17_pro_max)
+            score = 4,
+            price = "25.000.000đ",
+            thumbnail = painterResource(R.drawable.product_1)
         ),
         Product(
             id = 1,
-            title = "Laptop Gaming Asus ROG",
-            score = 5,
-            price = "10.000.000đ",
-            thumbnail = painterResource(R.drawable.iphone_17_pro_max)
+            title = "Laptop Dell Inspiron",
+            score = 2,
+            price = "15.000.000đ",
+            thumbnail = painterResource(R.drawable.product_2)
         ),
         Product(
             id = 2,
-            title = "Laptop Gaming Asus ROG",
-            score = 5,
-            price = "10.000.000đ",
-            thumbnail = painterResource(R.drawable.iphone_17_pro_max)
+            title = "Điện thoại Samsung Galaxy S23",
+            score = 1,
+            price = "18.000.000đ",
+            thumbnail = painterResource(R.drawable.product_3)
         ),
         Product(
             id = 3,
-            title = "Laptop Gaming Asus ROG",
+            title = "Điện thoại iPhone 14",
             score = 5,
-            price = "10.000.000đ",
-            thumbnail = painterResource(R.drawable.iphone_17_pro_max)
+            price = "22.000.000đ",
+            thumbnail = painterResource(R.drawable.product_4)
         ),
         Product(
             id = 4,
             title = "Laptop Gaming Asus ROG",
-            score = 5,
-            price = "10.000.000đ",
-            thumbnail = painterResource(R.drawable.iphone_17_pro_max)
+            score = 4,
+            price = "25.000.000đ",
+            thumbnail = painterResource(R.drawable.product_1)
         ),
         Product(
             id = 5,
-            title = "Laptop Gaming Asus ROG",
-            score = 5,
-            price = "10.000.000đ",
-            thumbnail = painterResource(R.drawable.iphone_17_pro_max)
+            title = "Laptop Dell Inspiron",
+            score = 2,
+            price = "15.000.000đ",
+            thumbnail = painterResource(R.drawable.product_2)
         ),
         Product(
             id = 6,
-            title = "Laptop Gaming Asus ROG",
-            score = 5,
-            price = "10.000.000đ",
-            thumbnail = painterResource(R.drawable.iphone_17_pro_max)
+            title = "Điện thoại Samsung Galaxy S23",
+            score = 1,
+            price = "18.000.000đ",
+            thumbnail = painterResource(R.drawable.product_3)
         ),
         Product(
             id = 7,
-            title = "Laptop Gaming Asus ROG",
+            title = "Điện thoại iPhone 14",
             score = 5,
-            price = "10.000.000đ",
-            thumbnail = painterResource(R.drawable.iphone_17_pro_max)
+            price = "22.000.000đ",
+            thumbnail = painterResource(R.drawable.product_4)
         ),
         Product(
             id = 8,
             title = "Laptop Gaming Asus ROG",
-            score = 5,
-            price = "10.000.000đ",
-            thumbnail = painterResource(R.drawable.iphone_17_pro_max)
+            score = 4,
+            price = "25.000.000đ",
+            thumbnail = painterResource(R.drawable.product_1)
         )
     )
     val listCategory = listOf(
         Category(
             id = 0,
-            title = "Điện thoại",
-            thumbnail = painterResource(R.drawable.iphone_14_pro_in_hand)
+            title = "Laptop",
+            thumbnail = painterResource(R.drawable.cate_1)
         ),
         Category(
             id = 1,
             title = "Điện thoại",
-            thumbnail = painterResource(R.drawable.iphone_14_pro_in_hand)
+            thumbnail = painterResource(R.drawable.cate_2)
         ),
         Category(
             id = 2,
-            title = "Điện thoại",
-            thumbnail = painterResource(R.drawable.iphone_14_pro_in_hand)
+            title = "Phụ kiện",
+            thumbnail = painterResource(R.drawable.cate_3)
         ),
         Category(
             id = 3,
-            title = "Điện thoại",
-            thumbnail = painterResource(R.drawable.iphone_14_pro_in_hand)
+            title = "Thiết bị thông minh",
+            thumbnail = painterResource(R.drawable.cate_4)
         ),
         Category(
             id = 4,
-            title = "Điện thoại",
-            thumbnail = painterResource(R.drawable.iphone_14_pro_in_hand)
+            title = "Tablet",
+            thumbnail = painterResource(R.drawable.cate_5)
         )
     )
 
